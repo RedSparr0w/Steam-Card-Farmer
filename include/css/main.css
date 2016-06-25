@@ -40,13 +40,17 @@ p,h1,h2,h3,h4,h5,em,i,span,div,img{
 }
 body{
 	cursor:default;
-	background-color:#1b2838; /*#171a21;*/
-    overflow: hidden;
+	background-color:#1b2838;
+    overflow: scroll;
+    overflow-x: hidden;
 	max-height:100vh;
 	margin-top:0px;
 	margin-bottom:0px;
 	font-family: Brandon-Regular;
 	color:#EFEFEF;
+}
+::-webkit-scrollbar {
+    width: 0px;  /* remove scrollbar space */
 }
 .Window{
 	padding-top:40px;
@@ -170,7 +174,7 @@ body{
 	text-align:center;
 	z-index:1000;
 }
-#LoadingWindow i{
+#LoadingWindow i.fa-refresh{
 	font-size:60px;
 	margin-top:155px;
 	color:white;
@@ -197,13 +201,16 @@ body{
 	text-align:right;
 	background-color: #171a21;
 }
-#CurrentAppWindow #NewItems{
+#CurrentAppWindow #NewItems, #onlineStatus{
 	cursor: pointer;
 	float:left;
 	margin-left:5px;
 	margin-top: 2px;
 	font-family:Brandon-Light;
 }
+ #onlineStatus span{
+	cursor:pointer;
+ }
 #RefreshTime {
 	min-width:45px;
 	text-align:left;
