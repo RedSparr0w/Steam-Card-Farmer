@@ -23,10 +23,13 @@ app = remote.getGlobal('app');
 // If program not packaged assume running in dev mode
 if (process.defaultApp || /[\\/]electron-prebuilt[\\/]/.test(process.execPath)){
 	document.addEventListener("keydown", function (e) {
-		if (e.which === 123) {				//F12 | DevTools
-			g_CurrentWindow.webContents.openDevTools({mode:'detach'})
-		} else if (e.which === 116) {		//F5 | Refresh
-			location.reload();
+		switch(e.which){
+			case 123://F12 | DevTools
+				g_CurrentWindow.webContents.openDevTools({mode:'detach'});
+				break;
+			case 116://F5 | Refresh
+				location.reload();
+				break;
 		}
 	});
 }

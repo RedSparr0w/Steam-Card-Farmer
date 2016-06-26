@@ -242,17 +242,12 @@ function checkMinPlaytime(){
 							case 'c':
 								lowAppsToIdle = [];
 								lowHourApps.forEach(function(app) {
-									switch(prompt("Idle " + app.name + "? [y/n]").toLowerCase()){
-										case 'y':
-											lowAppsToIdle.push(app);
-											break;
-										case 'n':
-											break;
-										default:
-											break;
+									if(confirm("Idle " + app.name + "?")){
+										lowAppsToIdle.push(app);
 									}
 								});
 								startErUp();
+								break;
 							default: 
 								getResponseNewApps();
 						}
