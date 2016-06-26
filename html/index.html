@@ -19,6 +19,17 @@
 remote = require('electron').remote;
 g_CurrentWindow = remote.getGlobal('g_CurrentWindow');
 app = remote.getGlobal('app');
+
+// If program not packaged assume running in dev mode
+if (process.defaultApp || /[\\/]electron-prebuilt[\\/]/.test(process.execPath)){
+	document.addEventListener("keydown", function (e) {
+		if (e.which === 123) {				//F12 | DevTools
+			g_CurrentWindow.webContents.openDevTools({mode:'detach'})
+		} else if (e.which === 116) {		//F5 | Refresh
+			location.reload();
+		}
+	});
+}
 </script>
 <div id="Menu">
 	<div id="WindowDragable" style="-webkit-app-region: drag;">
@@ -28,7 +39,7 @@ app = remote.getGlobal('app');
 		<a href="#" id="AppLogout" onclick="client.logOff();location.reload();" style="right:56px;">
 			<i class="fa fa-sign-out"></i>
 		</a>
-		<a href="#" id="AppSettings" onclick="g_CurrentWindow.webContents.openDevTools({mode:'detach'})" style="right:30px;">
+		<a href="#" id="AppSettings" data-toggle="modal" data-target="#OptionsModal" style="right:30px;">
 			<i class="fa fa-cog"></i>
 		</a>
 		<a href="#" id="AppClose" onclick="app.quit();" style="right:0px;">
@@ -36,7 +47,6 @@ app = remote.getGlobal('app');
 		</a>
 	</div>
 </div>
-<!-- Login Modal -->
   <div id="LoginWindow" class="Window">
 	<div class="container">
 		<img src="http://steamcommunity-a.akamaihd.net/public/shared/images/header/globalheader_logo.png" />
@@ -54,7 +64,6 @@ app = remote.getGlobal('app');
 		</form>
 	</div>
   </div>
- <!--Loading Div-->
  <div id="LoadingWindow" class="Window">
 	<div class="container">
 		<i class="fa fa-spin fa-refresh"></i>
@@ -80,6 +89,22 @@ app = remote.getGlobal('app');
 	</ul>
 	</div>
  </div>
+ <div id="OptionsModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Options</h4>
+      </div>
+      <div class="modal-body">
+        <p>Some options in the modal.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 <script>
 $("#NewItems").tooltip();
 </script>
